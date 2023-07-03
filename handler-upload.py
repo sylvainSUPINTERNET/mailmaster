@@ -1,13 +1,24 @@
-import multipart
+# import multipart
 
-def uploadEmailList( event, context ) :
+# https://www.serverless.com/blog/handling-aws-lambda-python-dependencies
+
+from cgi import parse_header, parse_multipart
+from io import BytesIO, StringIO
+import base64
+import csv
+
+def uploadEmail(event, context):
     
-    # const { file, fields } = await parseFormData(event);
-    # const tags = { filename: file.filename };
+    print(event)
+    
+    c_type, c_data = parse_header(event['headers']['content-type'])
+    # Manually encode 'boundary' to bytes if it's present
+    if 'boundary' in c_data:
+        c_data['boundary'] = c_data['boundary'].encode()
 
-    # multipart_headers = {'Content-Type': environ['CONTENT_TYPE']}
-    # multipart_headers['Content-Length'] = environ['CONTENT_LENGTH']
-    multipart.parse_form_data(event['body'], event['headers'])
+    decoded_string = base64.b64decode(event['body'])
+    form_data = parse_multipart(BytesIO(decoded_string), c_data)
+    print(form_data)
 
     return {
         "statusCode": 200,  

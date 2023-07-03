@@ -69,13 +69,12 @@ functions:
       - httpApi: 
           path: /sendEmail
           method: post
-  sendEmail:
-    handler: handler-upload.uploadEmailList
+  uploadEmail:
+    handler: handler-upload.uploadEmail
     events:
       - httpApi:
           method: post
-          path: upload
-          cors: true
+          path: /upload/email
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
