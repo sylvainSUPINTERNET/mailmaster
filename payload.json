@@ -1,0 +1,6 @@
+{
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\"emails\": [\"fuck this shiet!\",\"sylvain.joly00@gmail.com\" ]}"
+  }
