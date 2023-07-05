@@ -21,7 +21,15 @@ def uploadEmail(event, context):
     
     
     for file_name in form_data.keys():
-        print(file_name)
+        file_data = form_data[file_name][0]
+        file_like_object = StringIO(file_data.decode())
+        csv_reader = csv.reader(file_like_object)
+         
+        # reading CSV content
+        for row in csv_reader:
+            print(row)
+            
+        print("===============")
         
     # print(form_data)
 
