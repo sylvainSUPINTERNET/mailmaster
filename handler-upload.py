@@ -18,7 +18,12 @@ def uploadEmail(event, context):
 
     decoded_string = base64.b64decode(event['body'])
     form_data = parse_multipart(BytesIO(decoded_string), c_data)
-    print(form_data)
+    
+    
+    for file_name in form_data.keys():
+        print(file_name)
+        
+    # print(form_data)
 
     return {
         "statusCode": 200,  
