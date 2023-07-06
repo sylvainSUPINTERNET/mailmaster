@@ -5,12 +5,10 @@
 from cgi import parse_header, parse_multipart
 from io import BytesIO, StringIO
 import base64
-import csv
+import csv 
 
 def uploadEmail(event, context):
-    
-    print(event)
-    
+        
     c_type, c_data = parse_header(event['headers']['content-type'])
     # Manually encode 'boundary' to bytes if it's present
     if 'boundary' in c_data:
@@ -19,6 +17,9 @@ def uploadEmail(event, context):
     decoded_string = base64.b64decode(event['body'])
     form_data = parse_multipart(BytesIO(decoded_string), c_data)
     
+    # handle param like name of column for email ( must be provided in form data)
+    # Check email is valid 
+    # Using pandas / vectorization for looping over df
     
     for file_name in form_data.keys():
         file_data = form_data[file_name][0]
@@ -30,7 +31,7 @@ def uploadEmail(event, context):
             print(row)
             
         print("===============")
-        
+    
     # print(form_data)
 
     return {
